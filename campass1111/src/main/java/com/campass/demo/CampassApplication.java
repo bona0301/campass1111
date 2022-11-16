@@ -8,10 +8,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
-public class Campass1111Application {
+public class CampassApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Campass1111Application.class, args);
+		SpringApplication.run(CampassApplication.class, args);
 	}
 	@Bean
 	public PasswordEncoder passwordEncoder() {

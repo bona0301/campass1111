@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.campass.demo.dao.CommentDao">
+
+	<!-- 글번호로 댓글 출력 -->
+	<select id="findByBno" resultType="com.campass.demo.dto.CommentDto$Read">
+		select cno,cContent,username,cWriteTime from bComment where bno=#{bno}
+	</select>
+	
+	<!-- 댓글 쓰기 -->
+	<insert id="save">
+		<selectKey keyProperty="cno" resultType="int" order="BEFORE">
+			select nvl(max(cno),0)+1 from bcomment
+		</selectKey>
+		insert into bcomment(cno,cContent,username,bno) 
+		values(#{cno},#{cContent},#{username},#{bno})
+	</insert>
+	
+	<!--  댓글 삭제 -->
+	<delete id="delete">
+		delete from bComment where cno=#{cno}
+	</delete>
+
+	<!-- 글쓴이 확인 -->
+	<select id="findById" resultType="String">
+		select username from bComment where cno=#{cno}
+	</select>
+</mapper>

@@ -1,0 +1,381 @@
+  CREATE TABLE "BCATEGORI" 
+   (	"BCATECODE" NUMBER(10,0), 
+	"BCATENAME" VARCHAR2(50 CHAR)
+   ) ;
+Insert into BCATEGORI (BCATECODE,BCATENAME) values (0,'KNOW-HOW');
+Insert into BCATEGORI (BCATECODE,BCATENAME) values (1,'QNA');
+
+  CREATE TABLE "BCOMMENT" 
+   (	"CNO" NUMBER(10,0), 
+	"BNO" NUMBER(10,0), 
+	"CCONTENT" CLOB, 
+	"CWRITETIME" DATE DEFAULT sysdate, 
+	"USERNAME" VARCHAR2(15 CHAR)
+   ) ;
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (1,1,to_date('22/11/04','RR/MM/DD'),'spring');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (2,1,to_date('22/11/04','RR/MM/DD'),'spring');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (3,1,to_date('22/11/04','RR/MM/DD'),'spring');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (4,1,to_date('22/11/04','RR/MM/DD'),'spring');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (5,1,to_date('22/11/04','RR/MM/DD'),'spring');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (6,1,to_date('22/11/04','RR/MM/DD'),'spring');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (7,1,to_date('22/11/04','RR/MM/DD'),'spring');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (8,1,to_date('22/11/04','RR/MM/DD'),'spring');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (19,6,to_date('22/11/05','RR/MM/DD'),'spring');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (10,2,to_date('22/11/04','RR/MM/DD'),'spring');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (11,2,to_date('22/11/04','RR/MM/DD'),'spring');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (21,4,to_date('22/11/05','RR/MM/DD'),'spring');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (13,3,to_date('22/11/04','RR/MM/DD'),'spring');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (22,6,to_date('22/11/05','RR/MM/DD'),'spring');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (23,7,to_date('22/11/06','RR/MM/DD'),'spring');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (16,5,to_date('22/11/04','RR/MM/DD'),'spring');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (17,2,to_date('22/11/04','RR/MM/DD'),'summer');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (18,2,to_date('22/11/05','RR/MM/DD'),'spring');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (20,6,to_date('22/11/05','RR/MM/DD'),'spring');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (24,8,to_date('22/11/06','RR/MM/DD'),'spring');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (25,8,to_date('22/11/06','RR/MM/DD'),'summer');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (26,10,to_date('22/11/06','RR/MM/DD'),'summer');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (29,5,to_date('22/11/07','RR/MM/DD'),'summer');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (27,10,to_date('22/11/06','RR/MM/DD'),'spring');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (28,10,to_date('22/11/06','RR/MM/DD'),'spring');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (32,18,to_date('22/11/07','RR/MM/DD'),'winter');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (30,15,to_date('22/11/07','RR/MM/DD'),'summer');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (31,16,to_date('22/11/07','RR/MM/DD'),'summer');
+Insert into BCOMMENT (CNO,BNO,CWRITETIME,USERNAME) values (33,18,to_date('22/11/07','RR/MM/DD'),'winter');
+
+
+
+  CREATE TABLE "BUYER" 
+   (	"USERNAME" VARCHAR2(100 CHAR), 
+	"BPASSWORD" VARCHAR2(100 CHAR), 
+	"BEMAIL" VARCHAR2(100 CHAR), 
+	"BNICKNAME" VARCHAR2(100 CHAR), 
+	"BNAME" VARCHAR2(100 CHAR), 
+	"BTEL" NUMBER(38,0), 
+	"BADRESS" VARCHAR2(100 CHAR), 
+	"ENABLED" NUMBER(1,0) DEFAULT 1, 
+	"ROLE" VARCHAR2(15 CHAR) DEFAULT 'ROLE_BUYER'
+   ) ;
+
+Insert into BUYER (USERNAME,BPASSWORD,BEMAIL,BNICKNAME,BNAME,BTEL,BADRESS,ENABLED,ROLE) values ('spring','$2a$10$EWz8VfPjSvI9EH6oUB.e7OkkTPpL0CHIQw8mQW9hg/Mi8SXrnTHzu','jhh93601@naver.com','니냐니노','스프링',1000000000,'인천시 미추홀구',1,'ROLE_BUYER');
+Insert into BUYER (USERNAME,BPASSWORD,BEMAIL,BNICKNAME,BNAME,BTEL,BADRESS,ENABLED,ROLE) values ('winter','$2a$10$QZhlOyEz.Y3Tsb5wEbVHOOReK1CJn3MGGQn1JMEwqWb1ZhEHQnGAS','leebona0301@gmail.com','winter','winter',0,'dfdadfdfadf',1,'ROLE_BUYER');
+Insert into BUYER (USERNAME,BPASSWORD,BEMAIL,BNICKNAME,BNAME,BTEL,BADRESS,ENABLED,ROLE) values ('summer','$2a$10$OXmVQPmg1tOO.lLloSE4BusLJkgs36KaP8g9tyVAsVLHmVq97yqym','leebona0301@naver.com','귀요미','summer',0,'ㄹㅇㅁㄴㄻㄻㄴㄹㄴㅁ',1,'ROLE_BUYER');
+Insert into BUYER (USERNAME,BPASSWORD,BEMAIL,BNICKNAME,BNAME,BTEL,BADRESS,ENABLED,ROLE) values ('kiyomi','$2a$10$LA8SATmPrCrllqifYnDOI.jRw7cdxxpJTnxfANcAIf8rIUYQCB/32','lll@naver.com','귀요me','귀요미',111111,'귀요미집',1,'ROLE_BUYER');
+Insert into BUYER (USERNAME,BPASSWORD,BEMAIL,BNICKNAME,BNAME,BTEL,BADRESS,ENABLED,ROLE) values ('aaaa','$2a$10$ph4bITKHnIlce20Q86BaN./HR.I6y8CmgR/aW8Ly8gNQkywJ3nsXy','kbb31865@naver.com','aaaa','aaaa',12321321,'aaaa',1,'ROLE_BUYER');
+Insert into BUYER (USERNAME,BPASSWORD,BEMAIL,BNICKNAME,BNAME,BTEL,BADRESS,ENABLED,ROLE) values ('SPRING','$2a$10$pXQnpoV/RBF4DV8RsYxwoOvlZfbH4LfIqrmoG3kbRoVayW21g/KCe','SPRING@NAVER.COM','SPRING','SPRING',1111,'ASDFSAFSA',1,'ROLE_BUYER');
+Insert into BUYER (USERNAME,BPASSWORD,BEMAIL,BNICKNAME,BNAME,BTEL,BADRESS,ENABLED,ROLE) values ('s111','$2a$10$TsrN4fUprO2Pw9OxltLenuzAXhFw6C3gS/31x1KVb4.UnS3SsWM5S','ddddd@naver.com','ddddd','ddd',11111,'111111',1,'ROLE_BUYER');
+
+
+  CREATE TABLE "PDTCART" 
+   (	"PDTCARTNO" NUMBER(10,0), 
+	"USERNAME" VARCHAR2(50 CHAR), 
+	"PCODE" VARCHAR2(50 CHAR), 
+	"PDTCARTAMO" NUMBER(10,0)
+   ) ;
+
+Insert into PDTCART (PDTCARTNO,USERNAME,PCODE,PDTCARTAMO) values (9,'spring','2',1);
+Insert into PDTCART (PDTCARTNO,USERNAME,PCODE,PDTCARTAMO) values (10,'spring','3',1);
+Insert into PDTCART (PDTCARTNO,USERNAME,PCODE,PDTCARTAMO) values (8,'username','1',1);
+
+  CREATE TABLE "PDTCATE" 
+   (	"PCATECODE" VARCHAR2(50 CHAR), 
+	"PCATENAME" VARCHAR2(50 CHAR)
+   ) ;
+
+Insert into PDTCATE (PCATECODE,PCATENAME) values ('sort01','tent');
+Insert into PDTCATE (PCATECODE,PCATENAME) values ('sort02','mat');
+Insert into PDTCATE (PCATECODE,PCATENAME) values ('sort03','table');
+Insert into PDTCATE (PCATECODE,PCATENAME) values ('sort04','dish');
+Insert into PDTCATE (PCATECODE,PCATENAME) values ('sort05','etc');
+
+
+  CREATE TABLE "PDTORDER" 
+   (	"PORDERNO" NUMBER(10,0), 
+	"USERNAME" VARCHAR2(15 CHAR), 
+	"PORDERDATE" DATE DEFAULT sysdate, 
+	"SHIPNAME" VARCHAR2(50 CHAR), 
+	"SHIPADDR" VARCHAR2(50 CHAR), 
+	"TOTALPRICE" NUMBER(10,0)
+   ) ;
+
+
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (1,'spring',to_date('22/11/02','RR/MM/DD'),'스프링','인천시 미추홀구',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (2,'spring',to_date('22/11/02','RR/MM/DD'),'스프링','인천시 미추홀구',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (3,'spring',to_date('22/11/02','RR/MM/DD'),'스프링','인천시 미추홀구',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (4,'spring',to_date('22/11/02','RR/MM/DD'),'스프링','인천시 미추홀구',3061000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (5,'spring',to_date('22/11/02','RR/MM/DD'),'스프링','인천시 미추홀구',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (6,'spring',to_date('22/11/02','RR/MM/DD'),'스프링','인천시 미추홀구',837000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (7,'spring',to_date('22/11/02','RR/MM/DD'),'스프링','인천시 미추홀구',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (8,'spring',to_date('22/11/02','RR/MM/DD'),'스프링','인천시 미추홀구',44000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (9,'spring',to_date('22/11/02','RR/MM/DD'),'스프링','인천시 미추홀구',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (10,'spring',to_date('22/11/03','RR/MM/DD'),'스프링','인천시 미추홀구',170000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (11,'spring',to_date('22/11/03','RR/MM/DD'),'스프링','인천시 미추홀구',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (12,'spring',to_date('22/11/03','RR/MM/DD'),'스프링','인천시 미추홀구',489000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (13,'spring',to_date('22/11/03','RR/MM/DD'),'스프링','인천시 미추홀구',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (14,'spring',to_date('22/11/03','RR/MM/DD'),'스프링','인천시 미추홀구',199000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (15,'spring',to_date('22/11/03','RR/MM/DD'),'스프링','인천시 미추홀구',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (16,'spring',to_date('22/11/03','RR/MM/DD'),null,null,266250);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (17,'spring',to_date('22/11/03','RR/MM/DD'),null,null,0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (18,'spring',to_date('22/11/03','RR/MM/DD'),'스프링','인천시 미추홀구',69000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (19,'spring',to_date('22/11/03','RR/MM/DD'),'스프링','인천시 미추홀구',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (20,'spring',to_date('22/11/03','RR/MM/DD'),'스프링','인천시 미추홀구',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (21,'spring',to_date('22/11/03','RR/MM/DD'),'스프링','인천시 미추홀구',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (22,'spring',to_date('22/11/03','RR/MM/DD'),'스프링','인천시 미추홀구',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (23,'spring',to_date('22/11/03','RR/MM/DD'),'스프링','인천시 미추홀구',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (24,'spring',to_date('22/11/03','RR/MM/DD'),'스프링','인천시 미추홀구',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (25,'spring',to_date('22/11/03','RR/MM/DD'),'스프링','인천시 미추홀구',1000000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (26,'spring',to_date('22/11/03','RR/MM/DD'),'스프링','인천시 미추홀구',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (27,'winter',to_date('22/11/04','RR/MM/DD'),'winter','dfdadfdfadf',399000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (28,'winter',to_date('22/11/04','RR/MM/DD'),'winter','dfdadfdfadf',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (29,'winter',to_date('22/11/04','RR/MM/DD'),'winter','dfdadfdfadf',970000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (30,'winter',to_date('22/11/04','RR/MM/DD'),'winter','dfdadfdfadf',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (31,'summer',to_date('22/11/04','RR/MM/DD'),'summer','ㄹㅇㅁㄴㄻㄻㄴㄹㄴㅁ',160000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (32,'summer',to_date('22/11/04','RR/MM/DD'),'summer','ㄹㅇㅁㄴㄻㄻㄴㄹㄴㅁ',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (33,'winter',to_date('22/11/04','RR/MM/DD'),'winter','dfdadfdfadf',99000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (34,'winter',to_date('22/11/04','RR/MM/DD'),'winter','dfdadfdfadf',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (35,'summer',to_date('22/11/04','RR/MM/DD'),'summer','ㄹㅇㅁㄴㄻㄻㄴㄹㄴㅁ',199000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (36,'summer',to_date('22/11/04','RR/MM/DD'),'summer','ㄹㅇㅁㄴㄻㄻㄴㄹㄴㅁ',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (37,'summer',to_date('22/11/04','RR/MM/DD'),'summer','ㄹㅇㅁㄴㄻㄻㄴㄹㄴㅁ',141000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (38,'summer',to_date('22/11/04','RR/MM/DD'),'summer','ㄹㅇㅁㄴㄻㄻㄴㄹㄴㅁ',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (39,'summer',to_date('22/11/04','RR/MM/DD'),'summer','ㄹㅇㅁㄴㄻㄻㄴㄹㄴㅁ',687000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (40,'summer',to_date('22/11/04','RR/MM/DD'),'summer','ㄹㅇㅁㄴㄻㄻㄴㄹㄴㅁ',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (41,'summer',to_date('22/11/04','RR/MM/DD'),'summer','ㄹㅇㅁㄴㄻㄻㄴㄹㄴㅁ',46000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (42,'summer',to_date('22/11/04','RR/MM/DD'),'summer','ㄹㅇㅁㄴㄻㄻㄴㄹㄴㅁ',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (43,'summer',to_date('22/11/04','RR/MM/DD'),'summer','ㄹㅇㅁㄴㄻㄻㄴㄹㄴㅁ',300000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (44,'summer',to_date('22/11/04','RR/MM/DD'),'summer','ㄹㅇㅁㄴㄻㄻㄴㄹㄴㅁ',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (45,'summer',to_date('22/11/04','RR/MM/DD'),'summer','ㄹㅇㅁㄴㄻㄻㄴㄹㄴㅁ',32000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (46,'summer',to_date('22/11/04','RR/MM/DD'),'summer','ㄹㅇㅁㄴㄻㄻㄴㄹㄴㅁ',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (47,'summer',to_date('22/11/04','RR/MM/DD'),'summer','ㄹㅇㅁㄴㄻㄻㄴㄹㄴㅁ',215000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (48,'summer',to_date('22/11/04','RR/MM/DD'),'summer','ㄹㅇㅁㄴㄻㄻㄴㄹㄴㅁ',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (49,'spring',to_date('22/11/05','RR/MM/DD'),'스프링','인천시 미추홀구',3435000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (50,'spring',to_date('22/11/05','RR/MM/DD'),'스프링','인천시 미추홀구',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (51,'spring',to_date('22/11/05','RR/MM/DD'),null,null,687000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (52,'spring',to_date('22/11/05','RR/MM/DD'),null,null,0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (53,'spring',to_date('22/11/05','RR/MM/DD'),'스프링','인천시 미추홀구',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (54,'spring',to_date('22/11/05','RR/MM/DD'),'스프링','인천시 미추홀구',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (55,'spring',to_date('22/11/05','RR/MM/DD'),null,null,0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (56,'spring',to_date('22/11/05','RR/MM/DD'),null,null,0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (57,'kiyomi',to_date('22/11/05','RR/MM/DD'),'귀요미','귀요미집',1420000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (58,'kiyomi',to_date('22/11/05','RR/MM/DD'),'귀요미','귀요미집',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (59,'kiyomi',to_date('22/11/05','RR/MM/DD'),'귀요미','귀요미집',92000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (60,'kiyomi',to_date('22/11/05','RR/MM/DD'),'귀요미','귀요미집',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (61,'kiyomi',to_date('22/11/06','RR/MM/DD'),'귀요미','귀요미집',35000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (62,'kiyomi',to_date('22/11/06','RR/MM/DD'),'귀요미','귀요미집',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (63,'winter',to_date('22/11/06','RR/MM/DD'),'winter','dfdadfdfadf',1716000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (64,'winter',to_date('22/11/06','RR/MM/DD'),'winter','dfdadfdfadf',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (65,'spring',to_date('22/11/06','RR/MM/DD'),'스프링','인천시 미추홀구',1069000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (66,'spring',to_date('22/11/06','RR/MM/DD'),'스프링','인천시 미추홀구',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (67,'summer',to_date('22/11/06','RR/MM/DD'),'summer','ㄹㅇㅁㄴㄻㄻㄴㄹㄴㅁ',39000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (68,'summer',to_date('22/11/06','RR/MM/DD'),'summer','ㄹㅇㅁㄴㄻㄻㄴㄹㄴㅁ',0);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (69,'kiyomi',to_date('22/11/06','RR/MM/DD'),'귀요미','귀요미집',55000);
+Insert into PDTORDER (PORDERNO,USERNAME,PORDERDATE,SHIPNAME,SHIPADDR,TOTALPRICE) values (70,'kiyomi',to_date('22/11/06','RR/MM/DD'),'귀요미','귀요미집',0);
+
+
+
+  CREATE TABLE "PDTREVIEW" 
+   (	"PREVIEWNO" NUMBER(10,0), 
+	"USERNAME" VARCHAR2(15 CHAR), 
+	"PSTAR" NUMBER(1,0), 
+	"PREVIEWCONTENT" CLOB, 
+	"PREVIEWDATE" DATE, 
+	"PODTNO" NUMBER(10,0), 
+	"PCODE" NUMBER(10,0)
+   ) ;
+
+
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (1,'spring',4,to_date('22/11/03','RR/MM/DD'),9,16);
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (2,'spring',2,to_date('22/11/03','RR/MM/DD'),9,16);
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (3,'spring',5,to_date('22/11/03','RR/MM/DD'),10,34);
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (4,'spring',1,to_date('22/11/03','RR/MM/DD'),11,39);
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (5,'spring',5,to_date('22/11/03','RR/MM/DD'),12,36);
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (6,'spring',3,to_date('22/11/03','RR/MM/DD'),13,35);
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (7,'spring',5,to_date('22/11/03','RR/MM/DD'),7,42);
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (8,'spring',5,to_date('22/11/03','RR/MM/DD'),10,34);
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (9,'spring',4,to_date('22/11/03','RR/MM/DD'),9,16);
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (10,'spring',2,to_date('22/11/03','RR/MM/DD'),14,42);
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (11,null,5,to_date('22/11/04','RR/MM/DD'),20,6);
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (12,null,3,to_date('22/11/04','RR/MM/DD'),20,6);
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (13,null,3,to_date('22/11/04','RR/MM/DD'),20,6);
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (14,null,2,to_date('22/11/04','RR/MM/DD'),20,6);
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (15,null,5,to_date('22/11/04','RR/MM/DD'),20,6);
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (16,null,5,to_date('22/11/04','RR/MM/DD'),20,6);
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (17,null,5,to_date('22/11/04','RR/MM/DD'),22,16);
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (18,null,4,to_date('22/11/04','RR/MM/DD'),24,1);
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (19,null,5,to_date('22/11/04','RR/MM/DD'),23,13);
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (20,null,3,to_date('22/11/04','RR/MM/DD'),25,32);
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (21,'summer',4,to_date('22/11/04','RR/MM/DD'),26,22);
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (22,'summer',1,to_date('22/11/04','RR/MM/DD'),27,46);
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (23,null,5,to_date('22/11/05','RR/MM/DD'),32,2);
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (24,null,5,to_date('22/11/05','RR/MM/DD'),32,2);
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (25,'kiyomi',5,to_date('22/11/06','RR/MM/DD'),32,2);
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (26,'winter',2,to_date('22/11/06','RR/MM/DD'),37,48);
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (27,'winter',5,to_date('22/11/06','RR/MM/DD'),21,43);
+Insert into PDTREVIEW (PREVIEWNO,USERNAME,PSTAR,PREVIEWDATE,PODTNO,PCODE) values (28,'kiyomi',5,to_date('22/11/06','RR/MM/DD'),31,3);
+
+
+
+  CREATE TABLE "PORDERITEM" 
+   (	"PODTNO" NUMBER(10,0), 
+	"PORDERNO" NUMBER(10,0), 
+	"PCODE" NUMBER(10,0), 
+	"PDTCARTAMO" NUMBER(10,0), 
+	"PNAME" VARCHAR2(50 CHAR), 
+	"PORDERSTATUS" VARCHAR2(50 CHAR) DEFAULT '후기작성'
+   ) ;
+
+
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (1,4,1,3,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (2,4,2,1,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (3,6,24,1,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (4,6,1,1,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (5,8,44,1,null,'구매완료');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (6,10,50,1,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (7,12,42,1,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (8,12,3,1,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (9,14,16,1,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (10,16,34,1,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (11,16,39,1,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (12,16,36,1,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (13,16,35,2,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (14,18,42,1,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (15,25,2,1,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (16,27,11,1,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (17,27,33,1,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (18,27,21,1,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (19,29,4,1,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (20,31,6,1,null,'구매완료');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (21,33,43,1,null,'구매완료');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (22,35,16,1,null,'구매완료');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (23,37,13,1,null,'구매완료');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (24,39,1,1,null,'구매완료');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (25,41,32,1,null,'구매완료');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (26,43,22,1,null,'구매완료');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (27,45,46,1,null,'구매완료');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (28,47,23,1,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (29,49,1,5,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (30,51,1,1,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (31,57,3,1,null,'구매완료');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (32,57,2,1,null,'구매완료');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (33,59,32,2,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (34,61,35,1,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (35,63,2,1,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (36,63,7,1,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (37,63,48,1,null,'구매완료');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (38,65,42,1,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (39,65,2,1,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (40,67,29,1,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (41,69,33,1,null,'후기작성');
+Insert into PORDERITEM (PODTNO,PORDERNO,PCODE,PDTCARTAMO,PNAME,PORDERSTATUS) values (42,69,37,1,null,'후기작성');
+
+
+  CREATE TABLE "PRODUCT" 
+   (	"PCODE" NUMBER(10,0), 
+	"PNAME" VARCHAR2(50 CHAR), 
+	"PMAINIMG" VARCHAR2(250 CHAR), 
+	"PCONTENTIMG" VARCHAR2(250 CHAR), 
+	"PBRAND" VARCHAR2(50 CHAR), 
+	"PSTARAVG" NUMBER(10,0), 
+	"PPRICE" NUMBER(10,0), 
+	"PCATECODE" VARCHAR2(50 CHAR), 
+	"STARAVG" NUMBER(2,1)
+   ) ;
+
+
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (1,'스텔라릿지','https://i.postimg.cc/PrVQZP1g/tent1.png','https://i.postimg.cc/0yGzbsnc/detail-tent1.png','몽벨',0,687000,'sort01',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (2,'서든크로스','https://i.postimg.cc/s2xPwSRP/tent2.png','https://i.postimg.cc/DZCG55QX/detail-tent2.png','테라노바',0,1000000,'sort01',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (3,'에어미니','https://i.postimg.cc/8CYR3512/tent3.png','https://i.postimg.cc/J0GkFJKd/detail-tent3.png','듀랑고',0,420000,'sort01',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (4,'롯지12','https://i.postimg.cc/mkfQL51V/tent4.png','https://i.postimg.cc/ZqxpvJCj/detail-tent4.png','듀랑고',0,970000,'sort01',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (5,'프라임 디럭스 플러스','https://i.postimg.cc/XJyf0bqp/tent5.png','https://i.postimg.cc/Sx0MZn9D/detail-tent5.png','스노우라인',0,780000,'sort01',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (6,'원터치 선쉐이드','https://i.postimg.cc/vZH5Z9DR/tent6.png','https://i.postimg.cc/SKhcKnNJ/detail-tent6.png','브루클린웍스',0,160000,'sort01',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (7,'아스트라돔','https://i.postimg.cc/T1VnpJrx/tent7.png','https://i.postimg.cc/QNy5T4dL/detail-tent7.png','스노우라인',0,452000,'sort01',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (8,'도기돔','https://i.postimg.cc/CMkGPS92/tent8.png','https://i.postimg.cc/C1MDj980/detail-tent8.png','몽벨',0,129000,'sort01',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (9,'코시3','https://i.postimg.cc/gkpv11W2/tent9.png','https://i.postimg.cc/90K7HMnX/detail-tent9.png','테라노바',0,327500,'sort01',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (10,'파나라마 오토 그늘막','https://i.postimg.cc/65hdKzWL/tent10.png','https://i.postimg.cc/Nf2X76KK/detail-tent10.png','카즈미',0,119000,'sort01',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (11,'셀시후드 침낭','https://i.postimg.cc/T1fJjs21/mat1.png','https://i.postimg.cc/63P7nLT9/detail-mat1.png','테톤',0,135000,'sort02',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (12,'아담앤이브','https://i.postimg.cc/RFz79YHd/mat2.png','https://i.postimg.cc/gkHZBhTK/detail-mat2.png','테톤',0,90000,'sort02',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (13,'알토스s','https://i.postimg.cc/wTWQJFCx/mat3.png','https://i.postimg.cc/tgTW6gDN/detail-mat3.png','테톤',0,141000,'sort02',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (14,'허클베리 포시즌 와이드','https://i.postimg.cc/bvnx7Psd/mat4.png','https://i.postimg.cc/bNhnTg3J/detail-mat4.png','테톤',0,190000,'sort02',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (15,'스웨이트 자충매트','https://i.postimg.cc/vZk72T8p/mat5.png','https://i.postimg.cc/XJB52DRZ/detail-mat5.png','필드스테이션',0,59000,'sort02',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (16,'아몬드 침낭','https://i.postimg.cc/P5PzMYHW/mat6.png','https://i.postimg.cc/Fsyy5873/detail-mat6.png','노르디스크',0,199000,'sort02',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (17,'조룬드 테크 비비 백','https://i.postimg.cc/v8tz8GXV/mat7.png','https://i.postimg.cc/kgwWDSN5/detail-mat7.png','노르디스크',0,390000,'sort02',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (18,'3D 매트','https://i.postimg.cc/BQZCXRww/mat8.png','https://i.postimg.cc/9QcGWb7S/detail-mat8.png','몬테라',0,311300,'sort02',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (19,'포터블 에어매트','https://i.postimg.cc/6qWC4GzG/mat9.png','https://i.postimg.cc/mrJzFyPT/detail-mat9.png','스노우아울',0,69800,'sort02',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (20,'에어폼 슬리핑매트','https://i.postimg.cc/xCyKdPG2/mat10.png','https://i.postimg.cc/CxKzPQDF/detail-mat10.png','노마드',0,263000,'sort02',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (21,'택티컬 필드 오피스 M','https://i.postimg.cc/Jz5DZhDN/table1.jpg','https://i.postimg.cc/SxMPXSHw/detail-table1.png','헬리녹스',0,225000,'sort03',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (22,'헬리녹스 x TSL 체어원','https://i.postimg.cc/0QFbPMFs/table2.jpg','https://i.postimg.cc/1zMrXbRk/detail-table2.png','헬리녹스',0,300000,'sort03',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (23,'택티컬 선셋체어','https://i.postimg.cc/q7BtLdy9/table3.jpg','https://i.postimg.cc/2yLQH6dY/detail-table3.png','헬리녹스',0,215000,'sort03',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (24,'우드믹스테이블 2pcs','https://i.postimg.cc/X7wp6vgR/table4.jpg','https://i.postimg.cc/7Y7chPFj/detail-table4.png','브루클린웍스',0,150000,'sort03',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (25,'쿠킹테이블','https://i.postimg.cc/N0NKCPxL/table5.jpg','https://i.postimg.cc/h4XNF1pD/detail-table5.png','스노우라인',0,152000,'sort03',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (26,'키즈체어','https://i.postimg.cc/rmKKBChj/table6.jpg','https://i.postimg.cc/T2BFT54r/detail-table6.png','스노우라인',0,26400,'sort03',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (27,'일체형 폴딩 캠핑 테이블','https://i.postimg.cc/SN0JP9cL/table7.jpg','https://i.postimg.cc/R03wCh8H/detail-table7.png','바나나빌딩',0,65900,'sort03',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (28,'슬림체어 2p 캠 체어 2개 세트','https://i.postimg.cc/wMN3vxYs/table8.jpg','https://i.postimg.cc/66CLG7QV/detail-table8.png','버팔로',0,19900,'sort03',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (29,'캠핑듀오체어 2인용 캠핑의자','https://i.postimg.cc/wxR1F2RT/table9.jpg','https://i.postimg.cc/fThCHcPg/detail-table9.png','버팔로',0,39000,'sort03',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (30,'레번튤렛트 체어워머','https://i.postimg.cc/kgqDJd1B/table10.jpg','https://i.postimg.cc/282W4nNW/detail-table10.png','기어팩',0,48600,'sort03',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (31,'원형 철판 그리들','https://i.postimg.cc/fRJp0VgF/dish1.jpg','https://i.postimg.cc/JhtS13M5/detail-dish1.png','페트로막스',0,76000,'sort04',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (32,'엔조이키친툴 세트','https://i.postimg.cc/mr9n804y/dish2.jpg','https://i.postimg.cc/fL9Fdw33/detail-dish2.png','스노우라인',0,46000,'sort04',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (33,'라이스쿠커','https://i.postimg.cc/B6GVyMQ9/dish3.jpg','https://i.postimg.cc/C5p2HWDc/detail-dish3.png','벨락',0,39000,'sort04',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (34,'캠핑식기세트','https://i.postimg.cc/BbSwZbKm/dish4.jpg','https://i.postimg.cc/jj9mCWj0/detail-dish4.png','코멕스',0,22000,'sort04',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (35,'티탸늄 보울 300mL','https://i.postimg.cc/T1tNKxjf/dish5.jpg','https://i.postimg.cc/9QQnpPRH/detail-dish5.png','키이스',0,35000,'sort04',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (36,'올인원 스테인리스 코펠세트 59p','https://i.postimg.cc/T2047VzF/dish6.jpg','https://i.postimg.cc/hPgwJRKj/detail-dish6.png','코스트위드',0,159000,'sort04',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (37,'주전자(케틀)','https://i.postimg.cc/cHMbNwrK/dish7.jpg','https://i.postimg.cc/FzbBPDVN/detail-dish7.png','탑앤탑',0,16000,'sort04',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (38,'파스텔 접시 16p','https://i.postimg.cc/sD00yVDJ/dish8.png','https://i.postimg.cc/3JBqmfwZ/detail-dish8.png','이지앤프리',0,9900,'sort04',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (39,'4단 메쉬 식기 건조망 + 수납 가방','https://i.postimg.cc/8zJXzq7g/dish9.png','https://i.postimg.cc/9XyKFQ5K/detail-dish9.png','헬로우캠핑',0,15250,'sort04',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (40,'에나멜 접시웨어 세트','https://i.postimg.cc/9FfNv4VM/dish10.png','https://i.postimg.cc/QdYnnB19/detail-dish10.png','콜맨',0,67000,'sort04',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (41,'S1 전기모기채','https://i.postimg.cc/L4GN0xyy/etc1.png','https://i.postimg.cc/k59Dz4CC/detail-etc1.png','루메나',0,24900,'sort05',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (42,'컨테이너 75리터','https://i.postimg.cc/G2VJVpjB/etc2.png','https://i.postimg.cc/pTcTmJFV/detail-etc2.png','토르',0,69000,'sort05',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (43,'120kg 캠핑 폴딩 카트','https://i.postimg.cc/jjqXJm5j/etc3.png','https://i.postimg.cc/Hk1L8xVM/detail-etc3.png','버팔로',0,99000,'sort05',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (44,'플레이 배드민턴','https://i.postimg.cc/vH93R5kG/etc4.jpg','https://i.postimg.cc/brGvkSxx/detail-etc4.png','스노우라인',0,44000,'sort05',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (45,'수류탄 인센스콘 홀더','https://i.postimg.cc/Vs0FMjYX/etc5.png','https://i.postimg.cc/8P65CWPD/detail-etc5.png','커먼크래프트',0,33000,'sort05',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (46,'액티브 마이크로 토치','https://i.postimg.cc/4xgwXmRV/etc6.jpg','https://i.postimg.cc/XqTY8NLT/detail-etc6.png','소토',0,32000,'sort05',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (47,'3단 우드 선반','https://i.postimg.cc/hjf12mVW/etc7.jpg','https://i.postimg.cc/fWFyZ5sB/detail-etc7.png','트레블첵',0,59000,'sort05',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (48,'파워스토브 W','https://i.postimg.cc/g0MKysXH/etc8.jpg','https://i.postimg.cc/43JNwSvN/detail-etc8.png','미니멀웍스',0,264000,'sort05',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (49,'챠카 가스 토치','https://i.postimg.cc/8zm4cNT3/etc9.jpg','https://i.postimg.cc/fLRyWrkg/detail-etc9.png','소토',0,40000,'sort05',null);
+Insert into PRODUCT (PCODE,PNAME,PMAINIMG,PCONTENTIMG,PBRAND,PSTARAVG,PPRICE,PCATECODE,STARAVG) values (50,'어헨져미니 행어쉘프','https://i.postimg.cc/6qZLXNHM/etc10.png','https://i.postimg.cc/YSb2Pz8N/detail-etc10.png','야간비행',0,170000,'sort05',null);
+
+
+  CREATE TABLE "SELLER" 
+   (	"USERNAME" VARCHAR2(100 CHAR), 
+	"SPASSWORD" VARCHAR2(100 CHAR), 
+	"SEMAIL" VARCHAR2(100 CHAR), 
+	"SNAME" VARCHAR2(100 CHAR), 
+	"STEL" NUMBER(38,0), 
+	"BUSINESSNAME" VARCHAR2(100 CHAR), 
+	"BUSINESSNO" NUMBER(15,0), 
+	"ENABLED" NUMBER(1,0) DEFAULT 1, 
+	"ROLE" VARCHAR2(15 CHAR) DEFAULT 'ROLE_SELLER'
+   ) ;
+
+Insert into SELLER (USERNAME,SPASSWORD,SEMAIL,SNAME,STEL,BUSINESSNAME,BUSINESSNO,ENABLED,ROLE) values ('summer','$2a$10$JmzNt.4YGNP5gTHAbOgm3eXpYQJHwaRJPYpe6UKEt/o4zjjECfB2y','leebona0301@gmail.com','이보나',11111111,'뽀',56545464,1,'ROLE_SELLER');
+Insert into SELLER (USERNAME,SPASSWORD,SEMAIL,SNAME,STEL,BUSINESSNAME,BUSINESSNO,ENABLED,ROLE) values ('aaaa','$2a$10$kYYh8k3HW7GrEK3R2BAP5eOXAXdMQZ0sBsRDqE9rGhV7QsYwIEeNW','aaaa@aaaa','aaaa',21312321,'aaaa',213123,1,'ROLE_SELLER');
+
+
+  CREATE TABLE "BOARD" 
+   (	"BNO" NUMBER(10,0), 
+	"BCONTENT" CLOB, 
+	"BTITLE" VARCHAR2(50 CHAR), 
+	"BWRITETIME" DATE DEFAULT sysdate, 
+	"USERNAME" VARCHAR2(15 CHAR), 
+	"BCATECODE" VARCHAR2(50 CHAR), 
+	"READCNT" NUMBER(10,0) DEFAULT 0, 
+	"GOODCNT" NUMBER(10,0) DEFAULT 0, 
+	"BADCNT" NUMBER(10,0) DEFAULT 0, 
+	"COMMENTCNT" NUMBER(10,0) DEFAULT 0
+   ) ;
+
+Insert into BOARD (BNO,BTITLE,BWRITETIME,USERNAME,BCATECODE,READCNT,GOODCNT,BADCNT,COMMENTCNT) values (11,'질문이요',to_date('22/11/07','RR/MM/DD'),'summer','1',1,0,0,0);
+Insert into BOARD (BNO,BTITLE,BWRITETIME,USERNAME,BCATECODE,READCNT,GOODCNT,BADCNT,COMMENTCNT) values (12,'어떻게해요 ?',to_date('22/11/07','RR/MM/DD'),'summer','1',4,0,0,0);
+Insert into BOARD (BNO,BTITLE,BWRITETIME,USERNAME,BCATECODE,READCNT,GOODCNT,BADCNT,COMMENTCNT) values (3,'아오오오',to_date('22/11/04','RR/MM/DD'),'summer','0',21,0,0,1);
+Insert into BOARD (BNO,BTITLE,BWRITETIME,USERNAME,BCATECODE,READCNT,GOODCNT,BADCNT,COMMENTCNT) values (4,' dd',to_date('22/11/04','RR/MM/DD'),'summer','0',23,0,0,1);
+Insert into BOARD (BNO,BTITLE,BWRITETIME,USERNAME,BCATECODE,READCNT,GOODCNT,BADCNT,COMMENTCNT) values (5,' 하이',to_date('22/11/04','RR/MM/DD'),'summer','0',6,0,0,1);
+Insert into BOARD (BNO,BTITLE,BWRITETIME,USERNAME,BCATECODE,READCNT,GOODCNT,BADCNT,COMMENTCNT) values (6,' sdfsdf',to_date('22/11/05','RR/MM/DD'),'spring','0',0,0,0,1);
+Insert into BOARD (BNO,BTITLE,BWRITETIME,USERNAME,BCATECODE,READCNT,GOODCNT,BADCNT,COMMENTCNT) values (9,' sdfsfd',to_date('22/11/06','RR/MM/DD'),'spring','0',1,0,0,1);
+Insert into BOARD (BNO,BTITLE,BWRITETIME,USERNAME,BCATECODE,READCNT,GOODCNT,BADCNT,COMMENTCNT) values (10,' 수정',to_date('22/11/06','RR/MM/DD'),'spring','1',11,0,0,1);
+Insert into BOARD (BNO,BTITLE,BWRITETIME,USERNAME,BCATECODE,READCNT,GOODCNT,BADCNT,COMMENTCNT) values (13,'ㄹㄹㄹㄹ',to_date('22/11/07','RR/MM/DD'),'summer','1',13,0,0,0);
+Insert into BOARD (BNO,BTITLE,BWRITETIME,USERNAME,BCATECODE,READCNT,GOODCNT,BADCNT,COMMENTCNT) values (14,'노하우 ',to_date('22/11/07','RR/MM/DD'),'summer','0',1,0,0,0);
+Insert into BOARD (BNO,BTITLE,BWRITETIME,USERNAME,BCATECODE,READCNT,GOODCNT,BADCNT,COMMENTCNT) values (15,'캠핑이란? ',to_date('22/11/07','RR/MM/DD'),'winter','0',2,0,0,1);
+Insert into BOARD (BNO,BTITLE,BWRITETIME,USERNAME,BCATECODE,READCNT,GOODCNT,BADCNT,COMMENTCNT) values (16,'캠핑장 추천해주세요',to_date('22/11/07','RR/MM/DD'),'winter','1',12,0,0,1);
+Insert into BOARD (BNO,BTITLE,BWRITETIME,USERNAME,BCATECODE,READCNT,GOODCNT,BADCNT,COMMENTCNT) values (18,'캠린이',to_date('22/11/07','RR/MM/DD'),'summer','0',11,0,0,1);
+Insert into BOARD (BNO,BTITLE,BWRITETIME,USERNAME,BCATECODE,READCNT,GOODCNT,BADCNT,COMMENTCNT) values (19,'자고로 캠핑이란',to_date('22/11/07','RR/MM/DD'),'winter','0',0,0,0,0);
+Insert into BOARD (BNO,BTITLE,BWRITETIME,USERNAME,BCATECODE,READCNT,GOODCNT,BADCNT,COMMENTCNT) values (20,'추울때 ',to_date('22/11/07','RR/MM/DD'),'winter','1',0,0,0,0);
+
+
+commit;

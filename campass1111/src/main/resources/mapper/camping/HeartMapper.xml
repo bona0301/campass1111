@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.campass.demo.dao.HeartDao">
+
+
+
+	<insert id="insertHeart" parameterType="com.campass.demo.entity.Heart">
+	  <selectKey keyProperty="heartNo" resultType="int" order="BEFORE">
+  			select nvl(max (heartNo),0)+1 from Heart
+  	  </selectKey>
+	
+		insert into Heart (heartNo, h_cCode, h_username  ) values (#{heartNo}, #{h_cCode}, #{h_username}  )
+	</insert>
+	
+	<select id="getHeartListByUserid" resultType="com.campass.demo.entity.Heart">
+		select * from Heart where h_username = #{h_username}
+	</select>
+	
+	<delete id="delete">
+		delete from heart where h_username = #{h_username} and h_cCode = #{h_cCode}
+	</delete>
+	
+ 
+ 	<select id="getByCCodeWithId"  resultType="com.campass.demo.entity.Heart">
+ 		select * from heart where h_cCode = #{cCode} and h_username = #{username}
+ 	</select>
+
+
+  
+
+
+</mapper>
