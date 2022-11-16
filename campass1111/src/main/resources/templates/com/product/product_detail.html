@@ -69,9 +69,12 @@ $(document).ready(async function(){
     $("<li>").text(product.pdtDetail.pname).attr("class","pname").appendTo("#detail");
     $("<hr>").attr("class","hr").appendTo("#detail");
     $("<li>").text(product.pdtDetail.pprice.toLocaleString()+"원").attr("class","pprice").appendTo("#detail");
-    const aa = (product.pdtDetail.pstarAvg).toFixed(1);
-    $("<li>").text(aa).attr("class","star").appendTo("#detail");
-    
+    if(product.pdtDetail.pstarAvg != null) {
+	    const aa = (product.pdtDetail.pstarAvg).toFixed(1);
+	    $("<li>").text(aa).attr("class","star").appendTo("#detail");
+    } else{
+    	$("<li>").text("0").attr("class","star").appendTo("#detail");
+    }
  } 
  
  function printDetail(content){
