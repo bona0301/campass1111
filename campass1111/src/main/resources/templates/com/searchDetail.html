@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<title>Insert title here</title>
+<style>
+	.td1 { width: 30px; }
+	.td2 { width: 170px; }
+	.td3 { width: 50px; }
+	section { visibility: hidden;}
+</style>
+
+</head>
+
+<script>
+function getcCode() {
+	const params = new URLSearchParams(location.search);
+	const cCode = params.get("cCode");
+	if(cCode==null)
+		return 1;
+	if(isNaN(cCode))
+		return 1;
+	if(cCode<1)
+		return 1;
+	return cCode;
+}
+
+
+
+$(document).ready(async function () {
+	
+
+	const cCode = getcCode();
+
+
+
+})
+	 
+
+</script>
+
+	
+
+
+<body>
+	
+					
+					<div id="page">
+						<div id="username" sec:authentication="name" style="display:none;"></div>
+						<nav id="nav" th:replace="/fragments/nav">
+						</nav>
+						<div id="main">
+						
+						
+						
+						<input type="text" th:value="${campingDetail.cCode}" disabled>
+						  <li th:text="${campingDetail.cName}"></li>
+						  <li th:text="${campingDetail.cTel}"></li>
+						  <li th:text="${campingDetail.cAddr}"></li>
+						  <li th:text="${campingDetail.cContent}"></li>
+						 <img th:src="${campingDetail.cPhoto}" style="width:100px;">
+						
+						 			
+					
+					</div>
+					
+					
+					
+					
+					                <hr/>
+				                
+					
+						<div id="cZone">
+							<div>
+						         <div th:each="czList: ${cZoneSearch}">
+						         
+						           <input id="czCodeval" th:value="${czList.czCode}">
+						           <img th:src="${czList.czPhoto}" style="width:100px;">
+					                <li th:text="${czList.czName}"></li>
+					                <li th:text="${czList.czPrice}"></li>
+					               <input type="text" name="czList" th:value="${czList}"> 
+					                <input type="text" name="searchDto" th:value="${searchDto}">
+					                <input type="text" name="campingDetail" th:value="${campingDetail}"> 
+					               <div>
+					    			<a th:href="@{'/searchreserve?cCode='+ ${campingDetail.cCode}+'&czCode=' + ${czList.czCode}}" >
+					            	 <button id="clickk">예약하러가기</button>
+					             	</a>
+					               </div>
+									<br/>
+								</div>
+								
+								
+					         </div>
+						</div>
+						
+					</div>
+
+	
+	 
+	  			
+	  		
+	  			
+		<aside id="aside" th:replace="/fragments/aside">
+		</aside>
+
+	
+	<footer id="footer" th:replace="/fragments/footer">
+	</footer>
+	
+
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<title>Insert title here</title>
+<head>
+<script>
+/*
+	var loginId=document.getElementById("loginId");
+	var user=document.getElementById("user");
+	if(loginId===user){
+
+		document.getElementById("deleter").style.display = "block";
+        }
+ 	else{
+
+ 		document.getElementById("deleter").style.display = "none";
+        }
+
+	console.log(loginId);	
+	*/	
+	$(document).ready(function(){
+		console.log( $("#loginId").val() )
+		console.log( $("#user").val() )
+		console.log( $("#dd").val() )
+	})
+		
+		
+		//리뷰삭제버튼을 다시만들어야될거같다 폼으로 만드는게아니라 버튼으로 th 받아와서 해야될듯 
+		
+	
+	
+
+</script>
+</head>
+	 
+
+
+
+<body>
+
+	<div id="page">
+		<div id="username" sec:authentication="name" style="display:none;"></div>
+		<nav id="nav" th:replace="/fragments/nav">
+		</nav>
+		<div id="main">
+			<input type="hidden" th:value="${read.cCode}">
+			<input type="hidden" th:value="${read.c_username}" disabled>
+			<ul>
+			  	<li th:text="${read.cName}"></li>
+				<li th:text="${read.cTel}"></li>
+				<li th:text="${read.cAddr}"></li>
+				<li th:text="${read.cContent}"></li>
+				<img th:src="${read.cPhoto}" style="width:100px;">
+			</ul>
+		</div>	
+	</div>
+	<hr/>
+	<hr/>
+	<div id="cZone">
+		<div th:each="czList: ${czlist}">
+		   	<input type="hidden" th:value="${czList.czCode}">
+		    <img th:src="${czList.czPhoto}" style="width:100px;">
+			<ul>       
+				<li th:text="${czList.czName}"></li>
+			    <li th:text="${czList.czPrice}"></li>
+			    
+			</ul>
+
+			
+			<!-- 버튼 -->
+				              	 <div> 
+	   					 <a th:href="@{'/reserve?cCode='+ ${read.cCode}+'&czCode=' + ${czList.czCode}}" >
+	       			 		<button >예약하러가기 </button>
+	    				</a>
+	    			 </div>
+		</div>
+	</div>
+	
+	<div id="review">
+		<div >
+			 <table>
+			 <thead>
+			 <tr>
+			 
+			 <th> NO </th> 
+			 <th> ★ </th>
+			 <th> 내 용 </th>
+			 <th> 아이디 </th>
+			 <th></th>
+			 </tr>
+			 </thead>
+			 <tbody>
+			 <tr th:each="r: ${reviewList}">
+			  <form id="frmr" th:action="@{'/creviewDelete?cReviewNo=' + ${r.cReviewNo}}" th:method="delete">
+				 <td><p name="cReviewNo" th:text="${r.cReviewNo}"></p></td>
+				 <td><p th:text="${r.cReviewStar}"></p></td>
+				 <td><p th:text="${r.cReviewContent}"></p></td>
+				 <td><input type="hidden" name="cReview_cCode" th:value="${r.cReview_cCode}">
+				 <td><p id="user" th:text="${r.cReview_username}"></p></td>
+				 <td>
+		              <button>리뷰삭제</button></td>
+	           </form>
+			 </tr>
+
+			 </tbody>
+				 <p id="loginId" type="text" sec:authentication="name">삭제버튼 조건걸기 없애기 구현못하는중 교수님의 도움이 필요함 여깁니다교수님</p>
+			</table>   
+				
+       
+		
+		</div>
+	</div>
+	
+	
+	
+
+
+	  			
+	<aside id="aside" th:replace="/fragments/aside">
+	</aside>
+
+	
+	<footer id="footer" th:replace="/fragments/footer">
+	</footer>
+	
+
+
+
+</body>
+
+
+</html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<title>Insert title here</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script th:inline="javascript">
+		// 비로그인이면 anonymousUser
+		const loginInfo = /*[[${#authentication.principal}]]*/
+
+	</script>
+
+	<script>
+			let username1 = undefined;
+
+
+
+
+		$(document).ready(async function () {
+
+			function printPage(data) {
+				$("#username").text(data.username);
+				$("#myname").text(data.sname);
+				$("#mypassword").text(data.spassword);
+				$("#mybusinessNo").text(data.businessNo);
+				$("#myemail").text(data.semail);
+				$("#mytel").text(data.stel);
+				$("#mybusinessName").text(data.businessName);
+			}
+
+			// 로그인한 사용자 아이디를 저장. 비로그인이면 null
+			if (loginInfo !== "anonymousUser") {
+				username1 = loginInfo.username;
+			}
+
+			console.log(username1);
+
+			const read = await $.ajax({
+				url: "/seller/readseller",
+				data: {username: username1},
+				success: function (data) {
+					printPage(data.result);
+				}
+
+			})
+
+
+			console.log(read.result)
+
+
+
+			//이메일
+			$(document).on("click", "#updateemail", function () {
+
+				if ($("#newemail_div").attr("value") == "show") {
+
+					$("#updateemail").text("창닫기")
+
+					const $div = $("<div>").attr("id", "email_div").appendTo("#newemail_div");
+					const $form = $("<form>").attr("id", "updateemailform").appendTo($div);
+					$("<input>").attr("name", "semail").attr("id", "semail").appendTo($form)
+					$("<button>").attr("id", "checkEmail").text("중복확인").appendTo($div);
+					$("<button>").attr("id", "updateemail_btn").text("변경하기").appendTo($div)
+					$("#newemail_div").attr("value", "hide");
+
+				}
+
+				else if ($("#newemail_div").attr("value") == "hide") {
+					$("#newemail_div").attr("value", "show");
+					$("#email_div").remove();
+					$("#updateemail").text("변경하기")
+				}
+
+
+			})
+
+			$(document).on("click", "#checkEmail", async function () {
+				const paramEmail = {
+					semail: $('#semail').val()
+				};
+				const re = await $.ajax({
+					url: "/seller/check/email",
+					data: paramEmail,
+					method: "get"
+				})
+				$("#semail_msg").children().remove();
+				$("<span>").text(re.result).attr("id","emailspan").attr("value", re.result).appendTo("#semail_msg");
+				
+		})
+
+			$(document).on("click", "#updateemail_btn", async function (e) {
+						e.stopPropagation();
+				if($("#emailspan").attr("value") == "사용할 수 있는 이메일입니다") {
+							
+						alert("이메일을 변경하시겠습니까?")
+						console.log($('#semail').val())
+
+						//const formdata = $("#updatenickname").serialize();ssss
+
+						await $.ajax({
+							url: '/seller/update',
+							data: {semail: $('#semail').val()},
+							method: 'put',
+							success: function (data) {
+								console.log(data)
+								$("#myemail").text(data.result.semail);
+							}
+						}).done(() => location.href = '/seller/read')
+						
+				} else {
+							alert("변경 실패")
+				}
+			})
+
+
+
+
+			//연락처
+
+			$(document).on("click", "#updatetel", function () {
+
+				if ($("#newtel_div").attr("value") == "show") {
+
+					$("#updatetel").text("창닫기")
+
+
+					const $div = $("<div>").attr("id", "tel_div").appendTo("#newtel_div");
+					const $form = $("<form>").attr("id", "updatetelform").appendTo($div);
+					$("<input>").attr("name", "stel").attr("id", "stel").appendTo($form);
+					$("<button>").attr("id", "checkTel").text("중복확인").appendTo($div);
+					$("<button>").attr("id", "updatetel_btn").text("변경하기").appendTo($div);
+					$("#newtel_div").attr("value", "hide");
+
+				}
+
+				else if ($("#newtel_div").attr("value") == "hide") {
+					$("#newtel_div").attr("value", "show");
+					$("#tel_div").remove();
+					$("#updatetel").text("변경하기")
+				}
+
+			})
+
+
+			$(document).on("click", "#checkTel", async function () {
+				const paramTel = {
+					stel: $('#stel').val()
+				};
+
+				const rt = await $.ajax({
+					url: "/seller/check/tel",
+					data: paramTel,
+					method: "get"
+				})
+				console.log(rt.result);
+				$("#stel_msg").children().remove();
+				$("<span>").text(rt.result).attr("id","telspan").attr("value", rt.result).appendTo("#stel_msg");;
+			})
+			//	
+			//	
+
+
+
+		$(document).on("click", "#updatetel_btn", async function (e) {
+				e.stopPropagation();	
+				
+				
+			if($("#telspan").attr("value") == "사용 가능한 전화번호입니다") {
+					alert("연락처를 변경하시겠습니까?")
+					console.log($('#stel').val())
+	
+	
+					await $.ajax({
+						url: '/seller/update',
+						data: {stel: $('#stel').val()},
+						method: 'put',
+						success: function (data) {
+							$("#mytel").text(data.result.stel);
+							//location.href=location.href
+							console.log(data)
+						}
+					}).done(() => location.href = '/seller/read')
+					
+			} else {
+					alert("변경 실패")
+			}
+		});
+
+
+
+
+
+
+
+
+
+
+
+
+			//비밀번호
+
+			$(document).on("click", "#updatepassword", function () {
+
+				if ($("#newpassword_div").attr("value") == "show") {
+
+					$("#updatepassword").text("창닫기")
+
+					const $div = $("<div>").attr("id", "password_div").appendTo("#newpassword_div");
+					const $form = $("<form>").attr("id", "updatepasswordform").appendTo($div);
+					$("<input>").attr("name", "spassword").attr("id", "spassword").appendTo($form)
+					$("<button>").attr("id", "updatepassword_btn").text("변경하기").appendTo($div)
+
+					$("#newpassword_div").attr("value", "hide");
+
+
+				}
+
+				else if ($("#newpassword_div").attr("value") == "hide") {
+					$("#newpassword_div").attr("value", "show");
+					$("#password_div").remove();
+					$("#updatepassword").text("변경하기")
+				}
+
+			})
+
+			$(document).on("click", "#updatepassword_btn", function (e) {
+				e.stopPropagation();
+				alert("비밀번호를 변경하시겠습니까?")
+				console.log($('#spassword').val())
+
+				$.ajax({
+					url: '/seller/update',
+					data: {spassword: $('#spassword').val()},
+					method: 'put',
+					success: function (data) {
+						console.log(data)
+						$("#mypassword").text(data.result.spassword);
+					}
+				}).done(alert("비밀번호가 변경되었습니다")).done(() => location.href = '/seller/read')
+			})
+
+
+
+
+
+
+			/*				
+			$(document).on("click", "#updatepassword", async function(){
+						if ($("#newpassword").attr("value") == "show") {
+			
+							$("#updatepassword").text("창닫기")
+			
+							const $div = $("<div>").attr("id", "spassword_div").appendTo("#newpassword_div");
+							const $form = $("<form>").attr("id", "updatepassword_form").appendTo($div);
+							$("<input>").attr("name", "spassword").appendTo($form)
+							$("<button>").attr("id", "updatepassword_btn").text("변경하기").appendTo($div)
+			
+							$("#newpassword_div").attr("value", "hide");
+						}
+			
+						else if ($("#newpassword_div").attr("value") == "hide") {
+							$("#spassword_div").remove();
+							$("#newpassword_div").attr("value", "show");
+							$("#updatepassword").text("비밀번호 변경")
+						}
+					})
+			
+					$(document).on("click", "#updatepassword_btn", async function(e){
+						e.stopPropagation();
+						const formdata = $("#updatepassword_form").serialize();
+						
+						await $.ajax({
+							url : '/seller/update',
+							data : formdata,
+							method : 'put',
+							success : 
+								alert("비밀번호 변경 완료")
+							
+						})
+					})
+					
+			
+					/*		
+						const param = {
+									username : username
+								}
+								$("<div>").text(param.username).appendTo("#aa");
+				
+								const update = await $.ajax({
+									url: "/seller/read",
+									data: param,
+									method: "get"
+								});
+								console.log(update.result);
+								$("<div>").text(param.result).appendTo("#sname");
+				*/
+
+			$("#resign").click(async function () {
+
+				const resign = await $.ajax({
+					url: "http://localhost:8087/seller/resign",
+					method: "get"
+				}).done(() => location.href = '/seller/resign')
+			})
+		});
+
+	</script>
+
+</head>
+
+<body>
+	<div id="page">
+		<header id="header" th:replace="/fragments/header">
+		</header>
+		<nav id="nav" th:replace="/fragments/nav">
+		</nav>
+		<div id="main">
+			<aside id="aside" th:replace="/fragments/aside">
+			</aside>
+
+			<section id="section">
+
+				<colgroup>
+					<col width="30%">
+					<col width="70%">
+				</colgroup>
+
+
+				<div>
+					<p> 사업자명: <span id="mybusinessName"></span> </p>
+				</div>
+
+				<div>
+					<p> 사업자번호 : <span id="mybusinessNo"></span> </p>
+				</div>
+
+				<div>
+					<p> 이메일 : <span id="myemail"></span> </p>
+					<button id="updateemail" type="button"> 변경하기 </button>
+					<span id="semail_msg"></span>
+					<div id="newemail_div" value="show"></div>
+				</div>
+
+
+
+
+
+				<div>
+					<p> 연락처 : <span id="mytel"></span> </p>
+					<button id="updatetel"> 변경하기 </button>
+					<span id="stel_msg"></span>
+					<div id="newtel_div" value="show"></div>
+				</div>
+		</div>
+
+
+		<div>
+			<p> 비밀번호 : <span id="mypassword"></span> </p>
+			<button id="updatepassword"> 변경하기 </button>
+			<div id="newpassword_div" value="show"></div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<button type="button" class="btn btn-success" id="resign">탈퇴하기</button>
+	</section>
+	</div>
+	<footer id="footer" th:replace="/fragments/footer">
+	</footer>
+	</div>
+	<div id="aa"></div>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Bootstrap 4 Website Example</title>
+  <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  
+</head>
+<body>
+
+
+<script>
+function getcCode() {
+	const params = new URLSearchParams(location.search);
+	const cCode = params.get("cCode");
+	if(cCode==null)
+		return 1;
+	if(isNaN(cCode))
+		return 1;
+	if(cCode<1)
+		return 1;
+	return cCode;
+}
+
+$(document).ready(async function () {
+
+	const cCode = getcCode();
+	
+});
+
+
+</script>
+
+<form >	
+
+<!-- 이형식그대로 쓰기 리스트 html  링크빼고 -->
+       		
+       		<div> 
+       		<span th:each="ca: ${caName}">
+			 <span th:each="cam: ${CampingList}">
+			 <a id = "click" th:href="@{'/searchDetail?cCode='+ ${cam.cCode}}" >
+			 <li th:text="${ca}"></li>
+       	  	<li th:text="${cam.cName}"></li>
+	       	<input type="hidden" th:value="${cam.cCode}">
+       		 <img th:src="${cam.cPhoto}" style="width:100px;">
+             </a>
+             </span>
+             
+             
+	    	 </div>
+	    	 
+
+	             
+	        	       
+	    			
+	        
+</form>    
+
+
+
+</body>
+</html>
