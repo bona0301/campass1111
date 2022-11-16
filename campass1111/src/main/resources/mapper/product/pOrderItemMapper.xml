@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.campass.demo.dao.POrderItemDao">
+
+	<!-- 주문상품 추가 -->
+	<insert id="orderItemSave">
+		<selectKey keyProperty="pOdtNo" order="BEFORE" resultType="int">
+			select nvl(max(pOdtNo), 0)+1 from pOrderItem
+		</selectKey>	
+		insert into pOrderItem(pOdtNo, pOrderNo, pCode, pdtCartAmo)
+		values (#{pOdtNo}, #{pOrderNo}, #{pCode}, #{pdtCartAmo})
+	</insert>
+
+	<!--  장바구니 목록 가져오기  -->
+	<select id="cartListGet" resultType="com.campass.demo.dto.PdtCartDto$list">
+		select pdtCartAmo, pCode from pdtCart where username = #{username}
+	</select>
+	
+	<!-- 상품 가격,수량 가져오기 -->
+	<select id="pdtPriceCountGet" resultType="com.campass.demo.dto.POrderItemDto$PriceDto">
+		select poi.pCode, poi.pdtCartAmo, p.pPrice
+		from POrderItem poi left outer join product p 
+		on poi.pCode = p.pCode
+		left outer join PdtOrder po 
+		on po.pOrderNo = poi.pOrderNo
+		where poi.pOrderNo= #{pOrderNo} and po.username = #{username} 
+	</select>
+	
+	<!-- 주문번호 목록 가져오기 -->
+	<select id="OrderItemByOrder" resultType="int">
+		select count(*) from POrderItem where pOrderNo = #{pOrderNo}
+	</select>
+	
+	<!-- 주문내역 삭제 -->
+	<delete id="pOrderItemDelete">
+		delete from pOrderItem where pOrderNo = #{pOrderNo} and username = #{username}
+	</delete>
+</mapper>

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	
+	<link rel="stylesheet" href="/css/header.css">
+	<link rel="stylesheet" href="/css/product/porder.css">
+	<link rel="stylesheet" href="/css/product/header.css">
+	<link rel="stylesheet" href="/css/product/footer.css">
+	<link rel="stylesheet" href="/css/product/aside.css">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700&family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    	<style>
+	/* footer 시작 */
+
+#footer {
+  background: #fff;
+  width: 100%;
+  height: 170px;
+  position: relative;
+}
+
+.footerBox {
+   text-align: center;
+}
+
+
+	</style>
+	<!-- 다음주소 api cdn -->
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	
+	<script th:inline="javascript">
+	   // 비로그인이면 anonymousUser
+	   const loginInfo = /*[[${#authentication.principal}]]*/
+	
+	   
+			let username = null;
+
+	   $(document).ready(async function() {   
+	      
+	      // 로그인한 사용자 아이디를 저장. 비로그인이면 null
+	      if(loginInfo!=="anonymousUser") {
+	         username = loginInfo.username;
+	      }
+	      console.log(username);
+	      })
+	</script>
+	
+	
+
+	<script>	
+	$(document).ready(async function(){
+		
+			//장바구니 db연결
+			let result = await $.ajax({
+				url: '/buyer/pcart/list',
+				data: { username: username }	
+			});
+			
+			console.log(result);
+			
+			printOrderList(result);
+			orderPrice(result);
+			messageSelect();
+			
+			
+			//회원정보 db연결
+			let result2 = await $.ajax({
+				url: '/buyer/product/order/buyerinfo',
+				data: { username: username }	
+			});
+			
+			console.log(result2);
+			
+			printBuyerInfo(result2);
+
+
+			
+	// 구매하기 버튼
+	$('.orderButton').click(function(result2){
+		
+		let formdata = null;
+
+			// 배송정보 넘겨주기
+		 	// value값이 T일때(회원기본 배송지)
+			 	if ($(".selectAddress").attr("value") === 'T'){
+				
+					formdata = {
+					   username : username, 
+					   shipName : $(".tdname").attr("value"),
+					   shipAddr : $(".tdadress").attr("value"),
+					}
+					
+					$.ajax({
+					url: "/buyer/product/order/add",
+					data: formdata,
+					method: "post",
+					success: function(result){
+						location.href = "/buyer/product/porderfin";
+
+					}
+				})
+			}
+				
+				// 기본 배송지가 아닐때(입력 받았을때)
+				else if($(".selectAddress").attr("value") === 'F') {
+					
+					
+		// 기본배송지는 값이	1개인데 입력받은 건 2개이기때문에 하나로 합쳐주기 
+		const shipAddr2 = $('#address1').val() + " " + $('#address2').attr("class",'shipAddr2')
+		
+			console.log(shipAddr2)
+			
+				 formdata = {
+				   username : username, 
+				   shipName : $('.address_input').val(),
+				   shipAddr : $('.shipAddr2').val()
+				}
+				
+				console.log(formdata)
+				
+				$.ajax({
+					url: "/buyer/product/order/add",
+					data: formdata,
+					method: "post",
+					success: function(result){
+						
+						location.href = "/buyer/product/porderfin";
+					}
+					})
+				return 
+			}
+		})
+		
+	})
+
+	//회원정보 출력 
+	function printBuyerInfo(result2){
+			
+			//td값인 text내용을 가져와서 폼데이터에 넣어야함  !!!!!!!!!!!!!!!!!!!!!!
+			$(".tdname").text(result2.result.bname).attr("value",result2.result.bname)
+			$(".tdadress").text(result2.result.badress).attr("value",result2.result.badress)
+			$(".tdtel").text(result2.result.btel)
+			$(".tdemail").text(result2.result.bemail)
+
+		}
+
+				 
+	// 주소입력란 버튼 동작(숨김, 등장)
+	function printAdress(className){
+		/* 컨텐츠 동작 */
+			/* 모두 숨기기 */
+			$(".addressInfo_input_div").css('display', 'none');
+			/* 컨텐츠 보이기 */
+			$(".addressInfo_input_div_" + className).css('display', 'block');		
+		
+		/* 버튼 색상 변경 */
+			/* 모든 색상 동일 */
+				$(".address_btn").css('backgroundColor', 'grey');
+			/* 지정 색상 변경 */
+				$(".address_btn_"+className).css('backgroundColor', ' #FF375B');	
+		
+		
+	// 배송지 구분하기 
+		/* 모든 selectAddress F만들기 */
+		$(".addressInfo_input_div").each(function(i, obj){
+			$(obj).find(".selectAddress").val("F");
+			});
+		/* 선택한 selectAdress T만들기 */
+			$(".addressInfo_input_div_" + className).find(".selectAddress").val("T");
+			
+	}
+		
+		// 주문금액 출력 
+	function orderPrice(result) {
+		
+		let deliveryPrice = 0;			// 배송비
+		let totalPrice = 0;
+		let finalTotalPrice = 0; 		// 최종 가격(총 가격 + 배송비)
+			
+			//장바구니 리스트 반복문으로 금액 계산 
+			for(let i=0; i<result.length; i++){
+				totalPrice = totalPrice + (result[i].pprice * result[i].pdtCartAmo);
+			}
+			
+			// 배송비
+			if (totalPrice >= 70000) {
+				deliveryPrice = 0;
+			} else if (totalPrice == 0) {
+				deliveryPrice = 0;
+			} else {
+				deliveryPrice = 3000;
+			}
+			finalTotalPrice = totalPrice + deliveryPrice;
+			
+			$('<span>').text(totalPrice.toLocaleString()).appendTo(".totalPrice");
+			$('<span>').text(deliveryPrice.toLocaleString()).appendTo(".deliveryPrice");
+			$('<span>').text(finalTotalPrice.toLocaleString()).appendTo(".finalTotalPrice");
+		}	
+
+
+
+
+
+	// 다음 주소 연동 
+	function execution_daum_address(){``
+		   new daum.Postcode({
+		        oncomplete: function(data) {
+		            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+	                $("#address1").val(data.roadAddress)
+		        }
+		    }).open();  	
+	}
+
+
+	// 배송메모
+		function messageSelect(){
+
+	      //직접입력 인풋박스 기존에는 숨어있다가
+			$("#selboxDirect").hide();
+			$("#selbox").change(function() {
+				
+	      //직접입력을 누를 때 나타남
+			if($("#selbox").val() == "direct") {
+				$("#selboxDirect").show();
+			}  else {
+				$("#selboxDirect").hide();
+			}
+	});
+	}
+			
+
+	// 주문 진행내역 출력 
+	function printOrderList(result){
+			for (const list of result) {
+
+				const b = $("<tr>").attr("value", list.pdtCartNo).attr("class", "cart_info").appendTo("#cart")
+
+				$("<img>").attr("src", list.pmainImg).attr("class", "pmainImg").appendTo(b);
+				$("<td>").text(list.pname).appendTo(b);
+				$("<td>").text(list.pbrand).appendTo(b);
+				
+				$("<td>").text(list.pprice.toLocaleString()).attr("value", list.pprice).appendTo(b);
+				$("<td>").text(list.pdtCartAmo).attr("value", list.pprice).appendTo(b);
+		}
+	}
+	</script> 
+	
+<title>CAMPASS</title>
+</head>
+
+<body>
+<nav id="nav" th:replace="/fragments/nav"></nav>
+	<!-- nav 고정 -->
+	<nav id="pheader" th:replace="/buyer/productFragments/header"></nav>
+	<aside id="aside" th:replace="/buyer/productFragments/aside">
+	
+		<div></div>
+	</aside>
+	
+	<div class = "toptext_div"> 
+		 장바구니 → 
+		<span class = "toptext">주문결제</span> 
+		 → 완료
+	</div>
+	
+	<div id="main">
+			<!-- 주문 진행내역 -->  
+		<table class="cart_table">
+			<thead>
+				<tr>
+					<th></th>
+					<th>상품명</th>
+					<th>브랜드</th>
+					<th>가격</th>
+					<th>수량</th>
+				</tr>
+			</thead>
+			<tbody id="cart"> 
+			</tbody>
+		</table>	
+	 	<!-- 주문 진행내역  끝  -->
+	
+	 	
+	 	<!-- 가격정보  -->
+		 <table id="cart_price_table">
+			<tbody>
+				<tr>
+					<td>총 상품 가격</td>
+						 <td rowspan='2'>+</td>
+					<td>배송비</td>
+						 <td rowspan='2'>=</td>
+					<td><strong>총 결제 금액</strong></td>
+				</tr>
+				<tr>
+					<td><span class="totalPrice"></span> 원</td>
+					<td><span class="delivery_price"></span>원</td>
+					<td><span class="finalTotalPrice"></span>원</td>
+				</tr>									
+			</tbody>
+		</table>
+		<!-- 가격정보 끝   -->
+		
+		<div class="content_main">
+		
+			<!-- 배송지 정보 -->
+			<h3>배송 정보</h3>
+			<div class = address_div>
+					<div class="addressInfo_div">
+							<div class="addressInfo_button_div">
+								<button class="address_btn address_btn_1" onclick="printAdress('1')" style="background-color: gray;">기본주소</button>
+								<button class="address_btn address_btn_2" onclick="printAdress('2')">직접 입력</button>
+							</div>
+							
+							<!--  회원 기본주소 -->
+							<div class="addressInfo_input_div_wrap">
+								<div class="addressInfo_input_div addressInfo_input_div_1" style="display: block">
+										<table >
+											<colgroup>
+												<col width="25%">
+												<col width="*">
+											</colgroup>
+											<tbody id="info">
+												<tr>
+													<th>배송지명 </th>
+													<td class="tdname">
+													</td>
+												</tr>
+												<tr>
+													<!-- value값으로 배송지 선택 구분 -->
+													<th>배송주소</th>
+													<input class="selectAddress" value="T" type="hidden">
+													<td class="tdadress">
+													</td>	
+												</tr>
+											</tbody>
+										</table>
+								</div>
+								
+								<!-- api주소 입력 -->	
+								<div class="addressInfo_input_div addressInfo_input_div_2">
+										<table>
+											<colgroup> 
+												<col width="25%">
+												<col width="*">
+											</colgroup>
+											<tbody>
+												<tr>
+													<th>배송지명</th>
+													<td>
+														<input class="address_input">
+													</td>
+												</tr>
+												<tr>
+													<th>배송주소</th>
+													<td>
+														<input class="selectAddress" value="F" type="hidden">
+														<input id="address1" class="address_input" readonly="readonly"> <a class="address_search_btn" onclick="execution_daum_address()">주소 찾기</a><br>
+														<input id="address2" class="address1_input"><br>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+								</div>
+							</div>
+						</div>
+						
+						<span><strong>배송메모</strong></span>
+						<div class = "selbox_div">
+							<select id = "selbox" name="selbox">
+								<option selected="selected">선택</option>
+				  				<option>경비실에 맡겨주세요</option>
+							 	<option>도착시 연락주세요</option>
+							  	<option >문 앞에 놔주세요</option>
+							  	<option value="direct">직접입력</option>
+							</select>
+							<input type="text" id="selboxDirect" name="select"/>
+						</div>
+			</div>		<br>
+			<!-- 배송지 정보 끝 -->
+			
+			<!-- 회원 정보 -->
+				<h3>주문자 정보 </h3>
+			<div class = "info_div">
+						<table>
+							<colgroup>
+								<col width="25%">
+								<col width="*">
+							</colgroup>
+							<tbody>
+								<tr>
+									<th>이름</th>
+										<td class="tdname">
+										</td>
+								</tr>
+								<tr>
+									<th>연락처</th>
+										<td class="tdtel">
+										</td>
+								</tr>
+								<tr>
+									<th>이메일</th>
+										<td class= "tdemail">
+										</td>
+								</tr>
+							</tbody>
+						</table>
+				</div>
+			</div>	
+			<!-- 회원 정보 끝 -->
+			
+			
+			<!-- 결제 -->
+		<div id = "pay_div">
+			<h3>결제수단</h3>
+			
+			<form>
+			<span><input type="radio" id="pay1" name="pay" value="1" onchange="setDisplay()" checked>무통장입금</span>
+			</form>
+			<br>
+			
+			<p class = "bankAccount" >농협 100-000-00000 캠패스 </p>
+			
+			  <!-- 결제 버튼 -->
+	   		<div id="button_div">
+			      <button class="orderButton">구매하기</button>
+	   		</div>
+		</div>	   
+   
+   </div>
+	
+	<!-- footer 고정 -->
+	<footer id="footer">
+            <div class="footerBox"><img alt="푸터" src="https://i.postimg.cc/jd1BC4pb/Group-133.png"></div>
+        </footer>
+	
+	
+	
+
+
+
+</body>
+</html>

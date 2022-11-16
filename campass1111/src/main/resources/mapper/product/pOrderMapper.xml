@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.campass.demo.dao.POrderDao">
+
+	<!-- 주문처리 -->
+	<insert id="orderSave">
+		<selectKey keyProperty="pOrderNo" resultType="int" order="BEFORE">
+			select nvl(max(pOrderNo), 0)+1 from PdtOrder
+			<!-- select board_seq.nextval from dual -->
+		</selectKey>
+		insert into PdtOrder(pOrderNo, username, shipName, shipAddr, totalPrice)
+		values(#{pOrderNo}, #{username}, #{shipName}, #{shipAddr}, #{totalPrice})
+	</insert>
+	
+	<!-- 총합 업데이트 -->
+	<update id="totalPriceUpdate">
+		update pdtOrder set totalPrice = #{totalPrice} where pOrderNo = #{pOrderNo} and username = #{username}
+	</update>
+	
+	<!-- 장바구니 삭제 -->
+	<delete id="cartAllDelete">
+		delete from pdtCart where username=#{username}
+	</delete>
+</mapper>
+
+

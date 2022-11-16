@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.campass.demo.dao.PdtCartDao">
+	
+	<!-- 장바구니 추가 -->
+	<insert id="pAddCart">
+		<selectKey keyProperty="pdtCartNo" resultType="int" order="BEFORE">
+			select nvl(max(pdtCartNo), 0)+1 from pdtCart
+			<!-- select board_seq.nextval from dual -->
+		</selectKey>
+		insert into pdtCart(pdtCartNo, pdtCartAmo, username, pCode)
+		 values(#{pdtCartNo}, #{pdtCartAmo}, #{username}, #{pCode})
+	</insert>
+
+	<!-- 기존 장바구니에 추가 -->
+	<update id="cartPlus">
+		update pdtCart set pdtCartAmo = pdtCartAmo + #{pdtCartAmo} where pCode = #{pCode} and username = #{username}
+	</update>
+
+	<!-- 동일상품 확인  -->
+	<select id="checkCart" resultType="boolean">
+		select count(pCode) from pdtCart where pCode = #{pCode} and username = #{username}
+	</select>
+
+	<!--  장바구니 삭제 -->
+	<delete id="cartDelete">
+		delete from pdtCart where pdtCartNo=#{pdtCartNo}
+	</delete>
+	
+	<!-- 장바구니 조회(삭제시 필요) -->
+	<select id="findByCartNo" resultType="int">
+		select pdtCartNo from pdtCart where pCode = #{pCode}
+	</select>
+	
+	<!-- 수량변경 -->
+	<update id="cartAmoPlusCount">
+		update pdtCart set pdtCartAmo = pdtCartAmo + 1 where pdtcartNo = #{pdtcartNo}
+	</update>
+	
+	<update id="cartAmoMinusCount">
+		update pdtCart set pdtCartAmo = pdtCartAmo - 1 where pdtcartNo = #{pdtcartNo}
+	</update>
+	
+	<!-- 장바구니 리스트 -->
+	<select id="listCart" resultType="com.campass.demo.dto.PdtCartDto$Read">
+		select a.pdtcartNo, a.username, a.pCode, a.pdtcartAmo, b.pBrand, b.pName, b.pPrice, b.pMainImg
+		from pdtCart a left outer join product b on a.pCode = b.pCode
+		where username=#{username}
+	</select>
+	
+	<!-- 장바구니 수량 가져오기(수량변경시 필요) -->
+	<select id="getCount" resultType="integer">
+		select pdtcartAmo from pdtCart where pdtcartNo = #{pdtcartNo}
+	</select>
+	
+	<!-- 장바구니 용품갯수(구매하기 저장시 필요) -->
+	<select id="cartListSize" resultType="int">
+		select count(*) from pdtCart where username = #{username}
+	</select>
+
+	
+</mapper>
